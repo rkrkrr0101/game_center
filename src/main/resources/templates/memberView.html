@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/TableBorder.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div>
+    <div>
+        <div>
+            <label for="memberName">이름</label>
+            <input type="text" id="memberName" name="memberName">
+        </div>
+        <div>
+            <label for="levelType">레벨</label>
+            <select id="levelType" name="levelType">
+                <option value=""></option>
+                <option value="Gold">Gold</option>
+                <option value="Silver">Silver</option>
+                <option value="Bronze">Bronze</option>
+            </select>
+        </div>
+    </div>
+    <div>
+        <button id="searchButton">검색</button>
+        <button onclick="location.href='/view/savemember'">회원등록</button>
+    </div>
+    <div>
+
+        <table class="memberTable">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>이름</th>
+                <th>이메일</th>
+                <th>가입일자</th>
+                <th>레벨</th>
+                <th>카드갯수</th>
+            </tr>
+            </thead>
+            <tbody class="memberTableBody">
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(function () {
+        searchMember()
+        $("#searchButton").click(function (){
+            searchMember()
+        })
+    })
+    function searchMember(){
+        var queryUrl ="/member/all"
+        queryUrl+="?name="
+
+        if (!($("#memberName").val()==="")){
+            queryUrl+=$("#memberName").val()
+        }
+        queryUrl+="&level="
+        if (!($("#levelType").val()==="")){
+            queryUrl+=$("#levelType").val()
+        }
+        $.ajax({
+            type: "get",
+            url: queryUrl,
+            success: function (memberList) {
+                $('.memberTableBody').text("")
+                $.each(memberList.data, function (i) {
+                    memberUrl = `/view/findmember?id=${memberList.data[i].id}`;
+                    str = '<TR>';
+                    str += '<TD>' + memberList.data[i].id + '</TD>'
+                    str += '<TD onclick=location.href=`${memberUrl}` style="cursor:pointer;color:blue">'
+                        + memberList.data[i].name + '</TD>'
+                    str += '<TD>' + memberList.data[i].email + '</TD>'
+                    str += '<TD>' + memberList.data[i].joinDate + '</TD>'
+                    str += '<TD>' + memberList.data[i].level + '</TD>'
+                    str += '<TD>' + memberList.data[i].totalCardQuantity + '</TD>'
+                    str += '</TR>'
+                    $('.memberTableBody').append(str)
+                })
+
+            }
+        })
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/TableBorder.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div>
+    <div>
+        <button th:onclick="|location.href='/view/memberview'|">돌아가기</button>
+        <button th:onclick="|location.href='/view/updatemember?id=${id}'|">수정</button>
+        <button id="memberDeleteButton">삭제</button>
+    </div>
+    <div>
+        <label>id:</label>
+        <label id="memberId" th:text="${id}"></label>
+        <br>
+        <label>이름:</label>
+        <label id="memberName"></label>
+        <br>
+        <label>이메일:</label>
+        <label id="memberEmail"></label>
+        <br>
+        <label>총카드수:</label>
+        <label id="memberTotalQuantity"></label>
+        <br>
+        <label>총카드금액:</label>
+        <label id="memberTotalPrice"></label>
+        <br>
+        <label>레벨:</label>
+        <label id="memberLevel"></label>
+    </div>
+    <div>
+        <hr class="my-4">
+        <label>소유게임카드</label>
+        <br>
+        <button th:onclick="|location.href='/view/savegamecard?id=${id}'|">카드추가</button>
+
+
+        <br>
+        <table class="gameCardTable">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>게임종류</th>
+                <th>타이틀</th>
+                <th>일련번호</th>
+                <th>가격</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody class="gameCardTableBody">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function (){
+        searchAll()
+        $("#memberDeleteButton").click(function (){
+            deleteMember([[${id}]])
+        })
+    })
+    function searchAll(){
+        searchMember()
+        searchGameCard()
+    }
+    function searchMember(){
+        queryUrl=`/member/`
+        queryUrl+=[[${id}]]
+        console.log(queryUrl)
+        $.ajax({
+            type:"get",
+            url:queryUrl,
+            success:function (resp){
+                $("#memberEmail").text(resp.data.email)
+                $("#memberJoinDate").text(resp.data.joinDate)
+                $("#memberName").text(resp.data.name)
+                $("#memberTotalQuantity").text(resp.data.totalCardQuantity)
+                $("#memberTotalPrice").text(resp.data.totalCardPrice)
+                $("#memberLevel").text(resp.data.level)
+            }
+        })
+    }
+    function deleteMember(id){
+        if(confirm("정말 회원탈퇴하시겠습니까?")) {
+            var queryUrl = `/member/${id}`
+            $.ajax({
+                type: "delete",
+                url: queryUrl,
+                success: function () {
+                    alert("삭제에 성공했습니다")
+                    location.href="/view/memberview"
+                },
+                error: function () {
+                    alert("삭제에 실패했습니다")
+                }
+
+            })
+        }
+    }
+    function searchGameCard(){
+        var queryUrl ="/gamecard/all?memberId="
+        queryUrl+=[[${id}]]
+        $.ajax({
+            type: "get",
+            url: queryUrl,
+            success: function (gameCardList) {
+                $('.gameCardTableBody').text("")
+                $.each(gameCardList.data, function (i) {
+                    gameCardId=gameCardList.data[i].id
+                    str = '<TR>';
+                    str += '<TD>' + gameCardList.data[i].id + '</TD>'
+                    str += '<TD>' + gameCardList.data[i].gameTitle + '</TD>'
+                    str += '<TD>' + gameCardList.data[i].title + '</TD>'
+                    str += '<TD>' + gameCardList.data[i].serialNo + '</TD>'
+                    str += '<TD>' + gameCardList.data[i].price + '</TD>'
+                    str += '<TD onclick=gameCardDeleteAlert(`${gameCardId}`) style="cursor:pointer;color:blue">' + "삭제" + '</TD>'
+                    str += '</TR>'
+                    $('.gameCardTableBody').append(str)
+                })
+
+            }
+        })
+    }
+    function gameCardDeleteAlert(id){
+        if(confirm("정말 카드를 삭제하시겠습니까")){
+            $.ajax({
+                type:"delete",
+                url:`/gamecard/${id}`,
+                success:function (){
+                    alert("삭제했습니다")
+                    searchAll()
+                },
+                error:function (){
+                    alert("삭제에 실패했습니다")
+                }
+            })
+        }
+
+    }
+</script>
+</body>
+</html>

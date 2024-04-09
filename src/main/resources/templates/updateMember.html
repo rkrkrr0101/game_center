@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div>
+    <div>멤버수정</div>
+    <h4 class="mb-3"></h4>
+    <form id="memberUpdateForm"  method="post">
+        <div>
+            <label>id:</label>
+            <label id="memberId" th:text="${id}"></label>
+        </div>
+        <div>
+            <label for="memberName">이름　</label>
+            <input type="text"   id="memberName" name="memberName">
+        </div>
+        <div>
+            <label for="memberEmail">이메일 </label>
+            <input type="text"  id="memberEmail" name="memberEmail">
+        </div>
+        <div>
+            <label for="memberJoinDate">가입일</label>
+            <input type="text"  id="memberJoinDate" name="memberJoinDate">
+        </div>
+        <hr class="my-4">
+        <button id="updateButton" class="w-100 btn btn-secondary btn-lg" type="button">수정</button>
+    </form>
+    <div>
+        <table>
+            <tbody class="error_body">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $(function () {
+        $("#updateButton").click(function (){
+            memberId=[[${id}]]
+            const data = {}
+            data.name=$("#memberName").val()
+            data.email=$("#memberEmail").val()
+            data.joinDate=$("#memberJoinDate").val()
+            $.ajax({
+                type:"put",
+                contentType:"application/json",
+                url:`/member/${memberId}`,
+                data:JSON.stringify(data),
+                success:function (){
+                    alert("변경에 성공했습니다")
+                    location.href="/view/memberview"
+
+                },
+                error:function (response){
+                    $('.error_body').text("")
+                    messageList=[]
+                    messageList=messageList.concat(response.responseJSON.message)
+
+                    $.each(messageList,function(i){
+                        str='<TR>';
+                        str+='<TD>'+messageList[i]+'</TD>'
+                        str+='</TR>'
+                        $('.error_body').append(str)
+                    })
+
+                }
+            })
+        })
+    })
+</script>
+</html>

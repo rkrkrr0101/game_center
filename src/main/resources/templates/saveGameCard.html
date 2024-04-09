@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/TableBorder.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div>
+    <div>카드추가</div>
+    <h4 class="mb-3"></h4>
+    <form id="gameCardSaveForm"  method="post">
+        <div>
+            <label>멤버ID:</label>
+            <label id="memberId" th:text="${id}"></label>
+        </div>
+        <div>
+            <label for="gameType">게임종류</label>
+            <select id="gameType" name="gameType">
+
+            </select>
+        </div>
+        <div>
+            <label for="gameCardTitle">이름　　</label>
+            <input type="text"   id="gameCardTitle" name="gameCardTitle">
+        </div>
+        <div>
+            <label for="gameCardSerialNo">일련번호 </label>
+            <input type="text"  id="gameCardSerialNo" name="gameCardSerialNo">
+        </div>
+        <div>
+            <label for="gameCardPrice">가격　　</label>
+            <input type="text"  id="gameCardPrice" name="gameCardPrice">
+        </div>
+        <hr class="my-4">
+        <button id="saveButton" class="w-100 btn btn-secondary btn-lg" type="button">추가</button>
+    </form>
+    <div>
+        <table>
+            <tbody class="error_body">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $(function (){
+        searchGame()
+        $("#saveButton").click(function (){ saveGameCard()})
+    })
+    function searchGame(){
+        queryUrl=`/game/all`
+        $.ajax({
+            type:"get",
+            url:queryUrl,
+            success:function (resp){
+                $('.gameType').text("")
+                $.each(resp.data,function (i){
+                    str="<option "
+                    str+=` value= ${resp.data[i].id}`
+                    str+=">"
+                    str+=resp.data[i].title
+                    str+="</option>"
+                    $('#gameType').append(str)
+                })
+
+            }
+        })
+    }
+    function saveGameCard(){
+        const data = {}
+        data.title=$("#gameCardTitle").val()
+        data.serialNo=$("#gameCardSerialNo").val()
+        data.price=$("#gameCardPrice").val()
+        data.gameId=$("#gameType").val()
+        data.memberId=[[${id}]]
+        $.ajax({
+            type:"post",
+            contentType:"application/json",
+            url:`/gamecard/save`,
+            data:JSON.stringify(data),
+            success:function (){
+                alert("게임카드 추가에 성공했습니다")
+                location.href="/view/findmember?id="+[[${id}]]
+
+            },
+            error:function (response){
+                $('.error_body').text("")
+                messageList=[]
+                messageList=messageList.concat(response.responseJSON.message)
+
+                $.each(messageList,function(i){
+                    str='<TR>';
+                    str+='<TD>'+messageList[i]+'</TD>'
+                    str+='</TR>'
+                    $('.error_body').append(str)
+                })
+
+            }
+        })
+    }
+</script>
+</html>
