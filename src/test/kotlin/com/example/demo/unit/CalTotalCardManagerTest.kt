@@ -1,4 +1,6 @@
-package com.example.demo.unittest.caltotalcardmanager
+@file:Suppress("ktlint:standard:function-naming")
+
+package com.example.demo.unit
 
 import com.example.demo.caltotalcardmanager.CalTotalCardManager
 import com.example.demo.constant.Level
@@ -12,11 +14,10 @@ import java.math.RoundingMode
 import java.time.LocalDate
 
 class CalTotalCardManagerTest {
-
     private val calTotalCardManager = CalTotalCardManager()
 
     @Test
-    fun 정상적으로_카드의_수량과_가격을_계산할수_있다()  {
+    fun 정상적으로_카드의_수량과_가격을_계산할수_있다() {
         val testDate = LocalDate.parse("2020-11-01")
         val member = Member(name = "테스트1", email = "aa@naver.com", joinDate = testDate, id = 1)
         val pokeGame = Game("poke", 1)
@@ -60,7 +61,7 @@ class CalTotalCardManagerTest {
     }
 
     @Test
-    fun 정상적으로_실버_레벨을_계산할수_있다()  {
+    fun 정상적으로_실버_레벨을_계산할수_있다() {
         val testDate = LocalDate.parse("2020-11-01")
         val member = Member(name = "테스트1", email = "aa@naver.com", joinDate = testDate, id = 1)
         val pokeGame = Game("poke", 1)
@@ -92,7 +93,7 @@ class CalTotalCardManagerTest {
     }
 
     @Test
-    fun 카드가_두종류_이상이고_게임이_두종류_이상이고_100달러가_넘으면_골드레벨이다()  {
+    fun 카드가_두종류_이상이고_게임이_두종류_이상이고_100달러가_넘으면_골드레벨이다() {
         val testDate = LocalDate.parse("2020-11-01")
         val member = Member(name = "테스트1", email = "aa@naver.com", joinDate = testDate, id = 1)
         val pokeGame = Game("poke", 1)
@@ -124,7 +125,7 @@ class CalTotalCardManagerTest {
     }
 
     @Test
-    fun 카드가_네종류_이상이고_게임이_두종류_이상이면_골드레벨이다()  {
+    fun 카드가_네종류_이상이고_게임이_두종류_이상이면_골드레벨이다() {
         val testDate = LocalDate.parse("2020-11-01")
         val member = Member(name = "테스트1", email = "aa@naver.com", joinDate = testDate, id = 1)
         val pokeGame = Game("poke", 1)
@@ -176,7 +177,7 @@ class CalTotalCardManagerTest {
     }
 
     @Test
-    fun 카드가_없으면_브론즈_레벨이다()  {
+    fun 카드가_없으면_브론즈_레벨이다() {
         val testDate = LocalDate.parse("2020-11-01")
         val member = Member(name = "테스트1", email = "aa@naver.com", joinDate = testDate, id = 1)
         val pokeGame = Game("poke", 1)
@@ -188,7 +189,7 @@ class CalTotalCardManagerTest {
     }
 
     @Test
-    fun 아무리_카드가_많아도_0달러면_레벨계산에_포함되지않는다()  {
+    fun 아무리_카드가_많아도_0달러면_레벨계산에_포함되지않는다() {
         val testDate = LocalDate.parse("2020-11-01")
         val member = Member(name = "테스트1", email = "aa@naver.com", joinDate = testDate, id = 1)
         val pokeGame = Game("poke", 1)
@@ -251,7 +252,7 @@ class CalTotalCardManagerTest {
     }
 
     @Test
-    fun 아무리_카드가_비싸고_많아도_게임종류가_하나면_골드가_될수_없다()  {
+    fun 아무리_카드가_비싸고_많아도_게임종류가_하나면_골드가_될수_없다() {
         val testDate = LocalDate.parse("2020-11-01")
         val member = Member(name = "테스트1", email = "aa@naver.com", joinDate = testDate, id = 1)
         val pokeGame = Game("poke", 1)
