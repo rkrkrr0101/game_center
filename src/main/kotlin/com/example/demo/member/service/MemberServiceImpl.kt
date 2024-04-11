@@ -28,16 +28,7 @@ class MemberServiceImpl(
         name: String?,
         level: Level?,
     ): List<Member> {
-        if (name == null && level == null) {
-            return memberRepository.findAll(sort)
-        }
-        if (name == null) {
-            return memberRepository.findByLevel(level!!, sort)
-        }
-        if (level == null) {
-            return memberRepository.findByNameStartsWith(name, sort)
-        }
-        return memberRepository.findByNameStartsWithAndLevel(name, level, sort)
+        return memberRepository.findByDynamic(sort, name, level)
     }
 
     override fun findById(id: Long): Member {

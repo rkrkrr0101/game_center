@@ -15,19 +15,9 @@ interface MemberRepository {
 
     fun findByEmail(email: String): Member?
 
-    fun findByNameStartsWith(
-        name: String,
+    fun findByDynamic(
         sort: Sort,
-    ): List<Member>
-
-    fun findByLevel(
-        level: Level,
-        sort: Sort,
-    ): List<Member>
-
-    fun findByNameStartsWithAndLevel(
-        name: String,
-        level: Level,
-        sort: Sort,
+        name: String?,
+        level: Level?,
     ): List<Member>
 }
