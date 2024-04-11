@@ -1,3 +1,4 @@
+
 spring:
   h2:
     console:
@@ -20,3 +21,5 @@ spring:
   sql:
     init:
       mode: always
+server:
+  port: 8081
