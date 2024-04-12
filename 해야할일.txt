@@ -1,6 +1,6 @@
 리팩터링
 	queryDSL or kotlinJDSL사용 //완
-	queryDSL 유닛테스트 추가
+	queryDSL 유틸 유닛테스트 추가
 	필요없는 테스트코드 제거//완
 	    레포지토리 통합테스트 제거
 	    컨트롤러 유닛테스트 제거

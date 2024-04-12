@@ -41,7 +41,7 @@ class GameCardServiceTest
             memberRepository.save(member)
 
             val sort = Sort.by(Sort.Direction.ASC, "joinDate")
-            val findMember = memberRepository.findByNameStartsWith(name = "aaaa", sort)[0]
+            val findMember = memberRepository.findByDynamic(sort, "aaaa", null)[0]
 
             val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
             val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, findMember)
@@ -61,7 +61,7 @@ class GameCardServiceTest
             memberRepository.save(member)
 
             val sort = Sort.by(Sort.Direction.ASC, "joinDate")
-            val findMember = memberRepository.findByNameStartsWith(name = "aaaa", sort)[0]
+            val findMember = memberRepository.findByDynamic(sort, "aaaa", null)[0]
 
             val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
             val gameCard1 = GameCardInsertDto("aaa", 1, BigDecimal(30), game.id, findMember.id)
@@ -78,14 +78,14 @@ class GameCardServiceTest
             memberRepository.save(member)
 
             val sort = Sort.by(Sort.Direction.ASC, "joinDate")
-            val findMember = memberRepository.findByNameStartsWith(name = "aaaa", sort)[0]
+            val findMember = memberRepository.findByDynamic(sort, "aaaa", null)[0]
 
             val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
 
             // w
             val gameCardDto = GameCardInsertDto("aaa", 1, BigDecimal(30), game.id, findMember.id)
             gameCardService.save(gameCardDto)
-            val assertFindMember = memberRepository.findByNameStartsWith(name = "aaaa", sort)[0]
+            val assertFindMember = memberRepository.findByDynamic(sort, "aaaa", null)[0]
 
             // t
             Assertions.assertThat(assertFindMember.totalCardPrice)
@@ -99,14 +99,14 @@ class GameCardServiceTest
             memberRepository.save(member)
 
             val sort = Sort.by(Sort.Direction.ASC, "joinDate")
-            val findMember = memberRepository.findByNameStartsWith(name = "aaaa", sort)[0]
+            val findMember = memberRepository.findByDynamic(sort, "aaaa", null)[0]
 
             val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
 
             // w
             val gameCardDto = GameCardInsertDto("aaa", 1, BigDecimal(30), game.id, findMember.id)
             gameCardService.save(gameCardDto)
-            val assertFindMember = memberRepository.findByNameStartsWith(name = "aaaa", sort)[0]
+            val assertFindMember = memberRepository.findByDynamic(sort, "aaaa", null)[0]
 
             // t
             Assertions.assertThat(assertFindMember.totalCardQuantity).isEqualTo(1)
@@ -118,14 +118,14 @@ class GameCardServiceTest
             memberRepository.save(member)
 
             val sort = Sort.by(Sort.Direction.ASC, "joinDate")
-            val findMember = memberRepository.findByNameStartsWith(name = "aaaa", sort)[0]
+            val findMember = memberRepository.findByDynamic(sort, "aaaa", null)[0]
 
             val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
 
             // w
             val gameCardDto = GameCardInsertDto("aaa", 1, BigDecimal(30), game.id, findMember.id)
             gameCardService.save(gameCardDto)
-            val assertFindMember = memberRepository.findByNameStartsWith(name = "aaaa", sort)[0]
+            val assertFindMember = memberRepository.findByDynamic(sort, "aaaa", null)[0]
 
             // t
             Assertions.assertThat(assertFindMember.level).isEqualTo(Level.Silver)
@@ -138,7 +138,7 @@ class GameCardServiceTest
             memberRepository.save(member)
 
             val sort = Sort.by(Sort.Direction.ASC, "joinDate")
-            val findMember = memberRepository.findByNameStartsWith(name = "aaaa", sort)[0]
+            val findMember = memberRepository.findByDynamic(sort, "aaaa", null)[0]
 
             val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
             val gameCardDto1 = GameCardInsertDto("aaa", 1, BigDecimal(30), game.id, findMember.id)
@@ -156,7 +156,7 @@ class GameCardServiceTest
             memberRepository.save(member)
 
             val sort = Sort.by(Sort.Direction.ASC, "joinDate")
-            val findMember = memberRepository.findByNameStartsWith(name = "aaaa", sort)[0]
+            val findMember = memberRepository.findByDynamic(sort, "aaaa", null)[0]
 
             val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
             val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, findMember)
@@ -179,7 +179,7 @@ class GameCardServiceTest
             memberRepository.save(member)
 
             val sort = Sort.by(Sort.Direction.ASC, "joinDate")
-            val findMember = memberRepository.findByNameStartsWith(name = "aaaa", sort)[0]
+            val findMember = memberRepository.findByDynamic(sort, "aaaa", null)[0]
 
             val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
             val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, findMember)
@@ -204,7 +204,7 @@ class GameCardServiceTest
             memberRepository.save(member)
 
             val sort = Sort.by(Sort.Direction.ASC, "joinDate")
-            val findMember = memberRepository.findByNameStartsWith(name = "aaaa", sort)[0]
+            val findMember = memberRepository.findByDynamic(sort, "aaaa", null)[0]
 
             val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
             val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, findMember)
@@ -227,7 +227,7 @@ class GameCardServiceTest
             memberRepository.save(member)
 
             val sort = Sort.by(Sort.Direction.ASC, "joinDate")
-            val findMember = memberRepository.findByNameStartsWith(name = "aaaa", sort)[0]
+            val findMember = memberRepository.findByDynamic(sort, "aaaa", null)[0]
 
             val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
             val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, findMember)
