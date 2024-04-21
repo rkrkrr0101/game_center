@@ -48,14 +48,16 @@ class GameCardControllerE2ETest
                     "aa@naver.com",
                     CustomDateFake(TestConstant.TESTNOWDATE).now(),
                 )
-            memberRepository.save(member)
             val game = gameRepository.findAll()[0]
             val gameCard1 = GameCard("aaa", 12, BigDecimal(30), game, member)
             val gameCard2 = GameCard("bbb", 123, BigDecimal(30), game, member)
             val gameCard3 = GameCard("ccc", 1234, BigDecimal(30), game, member)
-            gameCardRepository.save(gameCard1)
-            gameCardRepository.save(gameCard2)
-            gameCardRepository.save(gameCard3)
+            member.addGameCard(gameCard1)
+            member.addGameCard(gameCard2)
+            member.addGameCard(gameCard3)
+
+            memberRepository.save(member)
+
             // w,t
             mvc.perform(MockMvcRequestBuilders.get("""/gamecard/all?memberId=${member.id}"""))
                 .andExpect(status().isOk)

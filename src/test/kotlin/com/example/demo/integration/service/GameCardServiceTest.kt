@@ -38,18 +38,15 @@ class GameCardServiceTest
         fun gameCard를_멤버단위로_조회할수있다() {
             // g
             val member = Member("aaaa", "aa@naver.com", LocalDate.parse(TestConstant.TESTNOWDATE))
-            memberRepository.save(member)
-
-            val sort = Sort.by(Sort.Direction.ASC, "joinDate")
-            val findMember = memberRepository.findByDynamic(sort, "aaaa", null)[0]
 
             val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
-            val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, findMember)
-            val gameCard2 = GameCard("bbb", 2, BigDecimal(40), game, findMember)
-            gameCardRepository.save(gameCard1)
-            gameCardRepository.save(gameCard2)
+            val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, member)
+            val gameCard2 = GameCard("bbb", 2, BigDecimal(40), game, member)
+            member.addGameCard(gameCard1)
+            member.addGameCard(gameCard2)
+            memberRepository.save(member)
             // w
-            val findGameCardList = gameCardService.findByMember(findMember.id)
+            val findGameCardList = gameCardService.findByMember(member.id)
             // t
             Assertions.assertThat(findGameCardList.size).isEqualTo(2)
         }
@@ -216,21 +213,17 @@ class GameCardServiceTest
         fun gameCard를_삭제할때_멤버의_레벨이_바뀐다() {
             // g
             val member = Member("aaaa", "aa@naver.com", LocalDate.parse(TestConstant.TESTNOWDATE))
-            memberRepository.save(member)
-
-            val sort = Sort.by(Sort.Direction.ASC, "joinDate")
-            val findMember = memberRepository.findByDynamic(sort, "aaaa", null)[0]
-
             val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
-            val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, findMember)
+            val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, member)
 
-            gameCardRepository.save(gameCard1)
+            member.addGameCard(gameCard1)
+            memberRepository.save(member)
             val deleteDto = GameCardDeleteDto(gameCard1.id)
 
-            println(gameCardRepository.findByMember(findMember)[0].id)
+            println(gameCardRepository.findByMember(member)[0].id)
             // w
             gameCardService.delete(deleteDto)
-            val assertMember = memberRepository.findById(findMember.id)
+            val assertMember = memberRepository.findById(member.id)
 
             // t
             Assertions.assertThat(assertMember.level).isEqualTo(Level.Bronze)

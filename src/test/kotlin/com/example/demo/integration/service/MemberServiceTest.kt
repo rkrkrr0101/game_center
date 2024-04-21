@@ -322,16 +322,16 @@ class MemberServiceTest
             memberService.save(insertDto1)
 
             val sort = Sort.by(Sort.Direction.ASC, "joinDate")
-            val findMember = memberService.findDynamicSearchSortBy(sort, name = "aaaa")[0]
+            val member = memberService.findDynamicSearchSortBy(sort, name = "aaaa")[0]
 
             val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
-            val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, findMember)
-            val gameCard2 = GameCard("bbb", 2, BigDecimal(40), game, findMember)
-            gameCardRepository.save(gameCard1)
-            gameCardRepository.save(gameCard2)
+            val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, member)
+            val gameCard2 = GameCard("bbb", 2, BigDecimal(40), game, member)
+            member.addGameCard(gameCard1)
+            member.addGameCard(gameCard2)
 
-            val findGameCardId = gameCardRepository.findByMember(findMember)[0].id
-            val deleteDto = MemberDeleteDto(findMember.id)
+            val findGameCardId = gameCardRepository.findByMember(member)[0].id
+            val deleteDto = MemberDeleteDto(member.id)
             // w
             memberService.delete(deleteDto)
             val memberList = memberService.findDynamicSearchSortBy(sort, name = "aaaa")
