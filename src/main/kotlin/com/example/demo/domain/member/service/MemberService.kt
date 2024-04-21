@@ -25,8 +25,8 @@ class MemberService(
 
     fun findDynamicSearchSortBy(
         sort: Sort,
-        name: String?,
-        level: Level?,
+        name: String? = null,
+        level: Level? = null,
     ): List<Member> {
         return memberRepository.findByDynamic(sort, name, level)
     }
