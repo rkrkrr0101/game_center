@@ -4,10 +4,6 @@ import com.example.demo.domain.gamecard.GameCard
 import com.example.demo.domain.member.Member
 
 interface GameCardRepository {
-    fun save(gameCard: GameCard)
-
-    fun delete(gameCard: GameCard)
-
     fun findByMember(member: Member): List<GameCard>
 
     fun findByGameAndSerialNo(

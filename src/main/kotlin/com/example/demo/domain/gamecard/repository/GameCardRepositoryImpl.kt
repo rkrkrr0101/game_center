@@ -11,14 +11,6 @@ import kotlin.jvm.optionals.getOrElse
 class GameCardRepositoryImpl(val gameCardJpaRepository: GameCardJpaRepository) : GameCardRepository {
     private val log = LoggerFactory.getLogger(this.javaClass)
 
-    override fun save(gameCard: GameCard) {
-        gameCardJpaRepository.save(gameCard)
-    }
-
-    override fun delete(gameCard: GameCard) {
-        gameCardJpaRepository.delete(gameCard)
-    }
-
     override fun findByMember(member: Member): List<GameCard> {
         return gameCardJpaRepository.findByMember(member)
     }
