@@ -3,15 +3,15 @@
 package com.example.demo.integration.service
 
 import com.example.demo.constant.Level
+import com.example.demo.domain.game.repository.GameRepository
+import com.example.demo.domain.gamecard.GameCard
+import com.example.demo.domain.gamecard.dto.GameCardDeleteDto
+import com.example.demo.domain.gamecard.dto.GameCardInsertDto
+import com.example.demo.domain.gamecard.repository.GameCardRepository
+import com.example.demo.domain.gamecard.service.GameCardService
+import com.example.demo.domain.member.Member
+import com.example.demo.domain.member.repository.MemberRepository
 import com.example.demo.exception.exception.GameCardDuplicateException
-import com.example.demo.game.repository.GameRepository
-import com.example.demo.gamecard.GameCard
-import com.example.demo.gamecard.dto.GameCardDeleteDto
-import com.example.demo.gamecard.dto.GameCardInsertDto
-import com.example.demo.gamecard.repository.GameCardRepository
-import com.example.demo.gamecard.service.GameCardService
-import com.example.demo.member.Member
-import com.example.demo.member.repository.MemberRepository
 import com.example.demo.mock.AlertPortMock
 import com.example.demo.mock.TestConstant
 import org.assertj.core.api.Assertions

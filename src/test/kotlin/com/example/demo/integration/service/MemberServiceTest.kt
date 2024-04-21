@@ -3,16 +3,16 @@
 package com.example.demo.integration.service
 
 import com.example.demo.constant.Level
+import com.example.demo.domain.game.repository.GameRepository
+import com.example.demo.domain.gamecard.GameCard
+import com.example.demo.domain.gamecard.repository.GameCardRepository
+import com.example.demo.domain.member.Member
+import com.example.demo.domain.member.dto.MemberDeleteDto
+import com.example.demo.domain.member.dto.MemberInsertDto
+import com.example.demo.domain.member.dto.MemberUpdateDto
+import com.example.demo.domain.member.repository.MemberRepository
+import com.example.demo.domain.member.service.MemberService
 import com.example.demo.exception.exception.EmailDuplicateException
-import com.example.demo.game.repository.GameRepository
-import com.example.demo.gamecard.GameCard
-import com.example.demo.gamecard.repository.GameCardRepository
-import com.example.demo.member.Member
-import com.example.demo.member.dto.MemberDeleteDto
-import com.example.demo.member.dto.MemberInsertDto
-import com.example.demo.member.dto.MemberUpdateDto
-import com.example.demo.member.repository.MemberRepository
-import com.example.demo.member.service.MemberService
 import com.example.demo.mock.*
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test

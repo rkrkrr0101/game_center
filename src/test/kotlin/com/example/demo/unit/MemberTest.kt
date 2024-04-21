@@ -3,9 +3,9 @@
 package com.example.demo.unit
 
 import com.example.demo.constant.Level
-import com.example.demo.game.Game
-import com.example.demo.gamecard.GameCard
-import com.example.demo.member.Member
+import com.example.demo.domain.game.Game
+import com.example.demo.domain.gamecard.GameCard
+import com.example.demo.domain.member.Member
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal

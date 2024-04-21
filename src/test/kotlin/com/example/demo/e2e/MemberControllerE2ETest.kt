@@ -4,8 +4,8 @@ package com.example.demo.e2e
 
 import com.example.demo.constant.Level
 import com.example.demo.customdate.CustomDate
-import com.example.demo.member.Member
-import com.example.demo.member.repository.MemberRepository
+import com.example.demo.domain.member.Member
+import com.example.demo.domain.member.repository.MemberRepository
 import com.example.demo.mock.CustomDateFake
 import com.example.demo.mock.TestConstant
 import com.fasterxml.jackson.databind.ObjectMapper

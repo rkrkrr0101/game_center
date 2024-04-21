@@ -1,7 +1,7 @@
 package com.example.demo.alert
 
 import com.example.demo.constant.Constant
-import com.example.demo.member.Member
+import com.example.demo.domain.member.Member
 import org.slf4j.LoggerFactory
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.http.HttpEntity
