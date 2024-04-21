@@ -3,7 +3,7 @@ package com.example.demo.domain.member.repository
 import com.example.demo.common.QueryDslUtil
 import com.example.demo.constant.Level
 import com.example.demo.domain.member.Member
-import com.example.demo.member.QMember
+import com.example.demo.domain.member.QMember
 import com.querydsl.core.types.dsl.BooleanExpression
 import com.querydsl.jpa.impl.JPAQueryFactory
 import jakarta.persistence.EntityNotFoundException
