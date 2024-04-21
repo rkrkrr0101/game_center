@@ -12,7 +12,7 @@ import com.example.demo.member.dto.MemberDeleteDto
 import com.example.demo.member.dto.MemberInsertDto
 import com.example.demo.member.dto.MemberUpdateDto
 import com.example.demo.member.repository.MemberRepository
-import com.example.demo.member.service.MemberServiceImpl
+import com.example.demo.member.service.MemberService
 import com.example.demo.mock.*
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
@@ -34,7 +34,7 @@ class MemberServiceTest
         val gameRepository: GameRepository,
     ) {
         val alertPort = AlertPortMock()
-        val memberService = MemberServiceImpl(memberRepository, gameCardRepository, alertPort)
+        val memberService = MemberService(memberRepository, gameCardRepository, alertPort)
 
         @Test
         fun 동적쿼리에_이름과_레벨을_넣지않으면_전체를_리턴한다() {

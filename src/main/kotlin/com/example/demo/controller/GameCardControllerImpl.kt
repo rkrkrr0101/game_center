@@ -1,4 +1,4 @@
-package com.example.demo.gamecard.controller
+package com.example.demo.controller
 
 import com.example.demo.common.Result
 import com.example.demo.gamecard.dto.GameCardDeleteDto

@@ -9,7 +9,7 @@ import com.example.demo.gamecard.GameCard
 import com.example.demo.gamecard.dto.GameCardDeleteDto
 import com.example.demo.gamecard.dto.GameCardInsertDto
 import com.example.demo.gamecard.repository.GameCardRepository
-import com.example.demo.gamecard.service.GameCardServiceImpl
+import com.example.demo.gamecard.service.GameCardService
 import com.example.demo.member.Member
 import com.example.demo.member.repository.MemberRepository
 import com.example.demo.mock.AlertPortMock
@@ -32,7 +32,7 @@ class GameCardServiceTest
         val memberRepository: MemberRepository,
         val gameRepository: GameRepository,
     ) {
-        val gameCardService = GameCardServiceImpl(gameCardRepository, memberRepository, gameRepository, AlertPortMock())
+        val gameCardService = GameCardService(gameCardRepository, memberRepository, gameRepository, AlertPortMock())
 
         @Test
         fun gameCard를_멤버단위로_조회할수있다() {
