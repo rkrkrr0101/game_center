@@ -153,20 +153,17 @@ class GameCardServiceTest
         fun gameCard를_삭제할수_있다() {
             // g
             val member = Member("aaaa", "aa@naver.com", LocalDate.parse(TestConstant.TESTNOWDATE))
+            val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
+            val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, member)
+            val gameCard2 = GameCard("bbb", 2, BigDecimal(40), game, member)
+            member.addGameCard(gameCard1)
+            member.addGameCard(gameCard2)
             memberRepository.save(member)
 
-            val sort = Sort.by(Sort.Direction.ASC, "joinDate")
-            val findMember = memberRepository.findByDynamic(sort, "aaaa", null)[0]
-
-            val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
-            val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, findMember)
-            val gameCard2 = GameCard("bbb", 2, BigDecimal(40), game, findMember)
-            gameCardRepository.save(gameCard1)
-            gameCardRepository.save(gameCard2)
             val deleteDto = GameCardDeleteDto(gameCard1.id)
             // w
             gameCardService.delete(deleteDto)
-            val gameCardList = gameCardRepository.findByMember(findMember)
+            val gameCardList = gameCardRepository.findByMember(member)
 
             // t
             Assertions.assertThat(gameCardList.size).isEqualTo(1)
@@ -176,20 +173,17 @@ class GameCardServiceTest
         fun gameCard를_삭제할때_멤버의_총가격이_바뀐다() {
             // g
             val member = Member("aaaa", "aa@naver.com", LocalDate.parse(TestConstant.TESTNOWDATE))
+            val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
+            val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, member)
+            val gameCard2 = GameCard("bbb", 2, BigDecimal(40), game, member)
+            member.addGameCard(gameCard1)
+            member.addGameCard(gameCard2)
             memberRepository.save(member)
 
-            val sort = Sort.by(Sort.Direction.ASC, "joinDate")
-            val findMember = memberRepository.findByDynamic(sort, "aaaa", null)[0]
-
-            val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
-            val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, findMember)
-            val gameCard2 = GameCard("bbb", 2, BigDecimal(40), game, findMember)
-            gameCardRepository.save(gameCard1)
-            gameCardRepository.save(gameCard2)
             val deleteDto = GameCardDeleteDto(gameCard2.id)
             // w
             gameCardService.delete(deleteDto)
-            val assertMember = memberRepository.findById(findMember.id)
+            val assertMember = memberRepository.findById(member.id)
 
             // t
             Assertions.assertThat(assertMember.totalCardPrice)
@@ -201,20 +195,18 @@ class GameCardServiceTest
         fun gameCard를_삭제할때_멤버의_총카드수가_바뀐다() {
             // g
             val member = Member("aaaa", "aa@naver.com", LocalDate.parse(TestConstant.TESTNOWDATE))
+            val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
+            val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, member)
+            val gameCard2 = GameCard("bbb", 2, BigDecimal(40), game, member)
+            member.addGameCard(gameCard1)
+            member.addGameCard(gameCard2)
+
             memberRepository.save(member)
 
-            val sort = Sort.by(Sort.Direction.ASC, "joinDate")
-            val findMember = memberRepository.findByDynamic(sort, "aaaa", null)[0]
-
-            val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
-            val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, findMember)
-            val gameCard2 = GameCard("bbb", 2, BigDecimal(40), game, findMember)
-            gameCardRepository.save(gameCard1)
-            gameCardRepository.save(gameCard2)
             val deleteDto = GameCardDeleteDto(gameCard2.id)
             // w
             gameCardService.delete(deleteDto)
-            val assertMember = memberRepository.findById(findMember.id)
+            val assertMember = memberRepository.findById(member.id)
 
             // t
             Assertions.assertThat(assertMember.totalCardQuantity).isEqualTo(1)

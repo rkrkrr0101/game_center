@@ -8,77 +8,75 @@ import com.example.demo.gamecard.dto.GameCardDeleteDto
 import com.example.demo.gamecard.dto.GameCardInsertDto
 import com.example.demo.gamecard.repository.GameCardRepository
 import com.example.demo.member.Member
-import com.example.demo.caltotalcardmanager.CalTotalCardManager
 import com.example.demo.member.repository.MemberRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
-
 @Service
 @Transactional(readOnly = true)
-class GameCardServiceImpl(val gameCardRepository: GameCardRepository,
-                          val memberRepository: MemberRepository,
-                          val gameRepository: GameRepository,
-                          val alertPort: AlertPort):GameCardService {
+class GameCardServiceImpl(
+    val gameCardRepository: GameCardRepository,
+    val memberRepository: MemberRepository,
+    val gameRepository: GameRepository,
+    val alertPort: AlertPort,
+) : GameCardService {
     @Transactional(readOnly = true)
     override fun findByMember(memberId: Long): List<GameCard> {
         val findMember = memberRepository.findById(memberId)
         return gameCardRepository.findByMember(findMember)
     }
+
     @Transactional
     override fun save(gameCardInsertDto: GameCardInsertDto) {
         val findGame = gameRepository.findById(gameCardInsertDto.gameId)
-        if (!isUniqueSerialNo(findGame.title,gameCardInsertDto.serialNo)){
+        if (!isUniqueSerialNo(findGame.title, gameCardInsertDto.serialNo)) {
             throw GameCardDuplicateException(
                 "카드의 일련번호가 중복입니다",
                 findGame.title,
-                gameCardInsertDto.serialNo
+                gameCardInsertDto.serialNo,
             )
         }
-        val findMember = memberRepository.findById(gameCardInsertDto.memberId)
+        val member = memberRepository.findById(gameCardInsertDto.memberId)
 
-        val gameCard = GameCard(
-            gameCardInsertDto.title,
-            gameCardInsertDto.serialNo,
-            gameCardInsertDto.price,
-            findGame,
-            findMember
-        )
-        gameCardRepository.save(gameCard)
-        calMemberLevel(findMember)
+        val gameCard =
+            GameCard(
+                gameCardInsertDto.title,
+                gameCardInsertDto.serialNo,
+                gameCardInsertDto.price,
+                findGame,
+                member,
+            )
+        val prevLevel = member.level
+        member.addGameCard(gameCard)
+        val curLevel = member.level
+        if (curLevel != prevLevel) {
+            levelAlertCall(member)
+        }
     }
 
     @Transactional
     override fun delete(gameCardDeleteDto: GameCardDeleteDto) {
-        val findGameCard = gameCardRepository.findById(gameCardDeleteDto.id)
-        val findMember = memberRepository.findById(findGameCard.member.id)
-        gameCardRepository.delete(findGameCard)
-        calMemberLevel(findMember)
+        val gameCard = gameCardRepository.findById(gameCardDeleteDto.id)
+        val member = memberRepository.findById(gameCard.member.id)
 
-    }
-    private fun isUniqueSerialNo(title:String,serialNo:Long):Boolean{
-        gameCardRepository.findByGameAndSerialNo(title, serialNo)?:return true
-        return false
-    }
-    private fun calMemberLevel(member: Member) {
         val prevLevel = member.level
-        val findGameCardList = gameCardRepository.findByMember(member)
-        val calTotalCardManager = CalTotalCardManager()
-
-        val (calQuantity, calPrice) = calTotalCardManager.calTotalCardQuantityAndPrice(findGameCardList)
-        val calLevel = calTotalCardManager.calLevel(findGameCardList)
-
-        member.totalCardQuantity=calQuantity
-        member.totalCardPrice=calPrice
-        member.level=calLevel
-
+        member.removeGameCard(gameCard)
         val curLevel = member.level
-        if (curLevel!=prevLevel){
+
+        if (curLevel != prevLevel) {
             levelAlertCall(member)
         }
     }
-    private fun levelAlertCall(member: Member){
-        alertPort.send(member)
+
+    private fun isUniqueSerialNo(
+        title: String,
+        serialNo: Long,
+    ): Boolean {
+        gameCardRepository.findByGameAndSerialNo(title, serialNo) ?: return true
+        return false
     }
 
+    private fun levelAlertCall(member: Member) {
+        alertPort.send(member)
+    }
 }

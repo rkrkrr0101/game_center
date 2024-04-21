@@ -41,7 +41,7 @@ class GameCardControllerE2ETest
         private fun jsonPath(key: String) = MockMvcResultMatchers.jsonPath(key)
 
         @Test
-        fun 멤버의_id로_게임카드를_조회할수_있다()  {
+        fun 멤버의_id로_게임카드를_조회할수_있다() {
             val member =
                 Member(
                     "aa",
@@ -63,13 +63,13 @@ class GameCardControllerE2ETest
         }
 
         @Test
-        fun 해당되는_id의_멤버가_없으면_멤버의_id로_게임카드를_조회시_httpcode400이_발생한다()  {
+        fun 해당되는_id의_멤버가_없으면_멤버의_id로_게임카드를_조회시_httpcode400이_발생한다() {
             mvc.perform(MockMvcRequestBuilders.get("""/gamecard/all?memberId=${100}"""))
                 .andExpect(status().isBadRequest)
         }
 
         @Test
-        fun 게임카드를_저장할수_있다()  {
+        fun 게임카드를_저장할수_있다() {
             val member =
                 Member(
                     "aa",
@@ -95,7 +95,7 @@ class GameCardControllerE2ETest
         }
 
         @Test
-        fun 게임카드를_저장할때_responseBody를_입력하지않으면_httpcode400이_발생한다()  {
+        fun 게임카드를_저장할때_responseBody를_입력하지않으면_httpcode400이_발생한다() {
             mvc.perform(
                 MockMvcRequestBuilders.post("""/gamecard/save""")
                     .contentType("application/json"),
@@ -104,7 +104,7 @@ class GameCardControllerE2ETest
         }
 
         @Test
-        fun 게임카드를_저장할때_responseBody를_문법에_맞지않게_작성하면_httpcode400이_발생한다()  {
+        fun 게임카드를_저장할때_responseBody를_문법에_맞지않게_작성하면_httpcode400이_발생한다() {
             val member =
                 Member(
                     "aa",
@@ -131,7 +131,7 @@ class GameCardControllerE2ETest
         }
 
         @Test
-        fun 게임카드를_저장할때_title이_영자리이하면_httpcode400이_발생한다()  {
+        fun 게임카드를_저장할때_title이_영자리이하면_httpcode400이_발생한다() {
             val member =
                 Member(
                     "aa",
@@ -157,7 +157,7 @@ class GameCardControllerE2ETest
         }
 
         @Test
-        fun 게임카드를_저장할때_title이_전체가_공백이면_httpcode400이_발생한다()  {
+        fun 게임카드를_저장할때_title이_전체가_공백이면_httpcode400이_발생한다() {
             val member =
                 Member(
                     "aa",
@@ -183,7 +183,7 @@ class GameCardControllerE2ETest
         }
 
         @Test
-        fun 게임카드를_저장할때_serialNo가_0이하면_httpcode400이_발생한다()  {
+        fun 게임카드를_저장할때_serialNo가_0이하면_httpcode400이_발생한다() {
             val member =
                 Member(
                     "aa",
@@ -209,7 +209,7 @@ class GameCardControllerE2ETest
         }
 
         @Test
-        fun 게임카드를_저장할때_price가_음수면_httpcode400이_발생한다()  {
+        fun 게임카드를_저장할때_price가_음수면_httpcode400이_발생한다() {
             val member =
                 Member(
                     "aa",
@@ -235,7 +235,7 @@ class GameCardControllerE2ETest
         }
 
         @Test
-        fun 게임카드를_저장할때_price가_100000초과면_httpcode400이_발생한다()  {
+        fun 게임카드를_저장할때_price가_100000초과면_httpcode400이_발생한다() {
             val member =
                 Member(
                     "aa",
@@ -261,7 +261,7 @@ class GameCardControllerE2ETest
         }
 
         @Test
-        fun 게임카드를_저장할때_price가_소수점자릿수3자리이상이면_2자리로_반올림한다()  {
+        fun 게임카드를_저장할때_price가_소수점자릿수3자리이상이면_2자리로_반올림한다() {
             val member =
                 Member(
                     "aa",
@@ -291,26 +291,27 @@ class GameCardControllerE2ETest
         }
 
         @Test
-        fun 게임카드의_id로_게임카드를_삭제할수_있다()  {
+        fun 게임카드의_id로_게임카드를_삭제할수_있다() {
             val member =
                 Member(
                     "aa",
                     "aa@naver.com",
                     CustomDateFake(TestConstant.TESTNOWDATE).now(),
                 )
-            memberRepository.save(member)
             val game = gameRepository.findAll()[0]
-            val gameCard1 = GameCard("aaa", 12, BigDecimal(30), game, member)
-            gameCardRepository.save(gameCard1)
+            val gameCard = GameCard("aaa", 12, BigDecimal(30), game, member)
+            member.addGameCard(gameCard)
+            memberRepository.save(member)
+
             // w
-            mvc.perform(MockMvcRequestBuilders.delete("""/gamecard/${gameCard1.id}"""))
+            mvc.perform(MockMvcRequestBuilders.delete("""/gamecard/${gameCard.id}"""))
                 .andExpect(status().isOk)
             val gameCardList = gameCardRepository.findByMember(member)
             Assertions.assertThat(gameCardList.size).isEqualTo(0)
         }
 
         @Test
-        fun 삭제시_해당되는_id의_게임카드가_없으면_httpcode400이_발생한다()  {
+        fun 삭제시_해당되는_id의_게임카드가_없으면_httpcode400이_발생한다() {
             mvc.perform(MockMvcRequestBuilders.delete("""/gamecard/${100}"""))
                 .andExpect(status().isBadRequest)
         }
