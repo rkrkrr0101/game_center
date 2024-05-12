@@ -10,16 +10,32 @@ import java.math.BigDecimal
 
 @Entity
 class GameCard(
-    var title: String,
-    var serialNo: Long,
-    var price: BigDecimal,
+    title: String,
+    serialNo: Long,
+    price: BigDecimal,
+    game: Game,
+    member: Member,
+    id: Long = 0,
+) : BaseEntity() {
+    var title = title
+        protected set
+    var serialNo = serialNo
+        protected set
+    var price = price
+        protected set
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "game_id")
-    var game: Game,
+    var game = game
+        protected set
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    var member: Member,
+    var member = member
+        protected set
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long = 0,
-) : BaseEntity()
+    var id = id
+        protected set
+}

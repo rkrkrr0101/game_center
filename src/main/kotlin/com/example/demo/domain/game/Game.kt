@@ -7,8 +7,14 @@ import jakarta.persistence.Id
 
 @Entity
 class Game(
-    var title: String,
+    title: String,
+    id: Long = 0,
+) {
+    var title = title
+        protected set
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long = 0,
-)
+    var id: Long = id
+        protected set
+}

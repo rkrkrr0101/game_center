@@ -52,9 +52,11 @@ class MemberService(
             throw EmailDuplicateException("이메일이 중복입니다", memberUpdateDto.email)
         }
         val findMember = memberRepository.findById(memberUpdateDto.id)
-        findMember.name = memberUpdateDto.name
-        findMember.email = memberUpdateDto.email
-        findMember.joinDate = memberUpdateDto.joinDate
+        findMember.update(
+            name = memberUpdateDto.name,
+            email = memberUpdateDto.email,
+            joinDate = memberUpdateDto.joinDate,
+        )
     }
 
     @Transactional

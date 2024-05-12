@@ -11,19 +11,49 @@ import java.time.LocalDate
 
 @Entity
 class Member(
-    var name: String,
-    var email: String,
-    var joinDate: LocalDate,
-    var totalCardQuantity: Int = 0,
-    var totalCardPrice: BigDecimal = BigDecimal("0"),
+    name: String,
+    email: String,
+    joinDate: LocalDate,
+    totalCardQuantity: Int = 0,
+    totalCardPrice: BigDecimal = BigDecimal("0"),
+    level: Level = Level.Bronze,
+    gameCardList: MutableList<GameCard> = mutableListOf(),
+    id: Long = 0,
+) : BaseEntity() {
+    var name = name
+        protected set
+    var email = email
+        protected set
+    var joinDate = joinDate
+        protected set
+    var totalCardQuantity = totalCardQuantity
+        protected set
+    var totalCardPrice = totalCardPrice
+        protected set
+
     @Enumerated(EnumType.STRING)
-    var level: Level = Level.Bronze,
+    var level = level
+        protected set
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = [(CascadeType.ALL)], orphanRemoval = true)
-    var gameCardList: MutableList<GameCard> = mutableListOf(),
+    var gameCardList = gameCardList
+        protected set
+
     @Id
     @GeneratedValue
-    var id: Long = 0,
-) : BaseEntity() {
+    var id = id
+        protected set
+
+    fun update(
+        name: String? = null,
+        email: String? = null,
+        joinDate: LocalDate? = null,
+    ) {
+        this.name = name ?: this.name
+        this.email = email ?: this.email
+        this.joinDate = joinDate ?: this.joinDate
+    }
+
     fun addGameCard(gameCard: GameCard) {
         gameCardList.add(gameCard)
         totalCardPrice += gameCard.price
