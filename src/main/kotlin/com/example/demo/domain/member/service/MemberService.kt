@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional
 class MemberService(
     val memberRepository: MemberRepository,
     val gameCardRepository: GameCardRepository,
-    val alertPort: AlertPort,
+    val alertPortList: List<AlertPort>,
 ) {
     private val log = LoggerFactory.getLogger(this.javaClass)
 
@@ -42,7 +42,9 @@ class MemberService(
             throw EmailDuplicateException("이메일이 중복입니다", memberInsertDto.email)
         }
         val saveMember = memberRepository.save(memberInsertDto.dtoToDomain())
-        alertPort.send(saveMember)
+        for (alertPort in alertPortList) {
+            alertPort.send(saveMember)
+        }
     }
 
     @Transactional

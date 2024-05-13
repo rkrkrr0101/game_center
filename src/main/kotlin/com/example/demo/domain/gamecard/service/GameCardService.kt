@@ -18,7 +18,7 @@ class GameCardService(
     val gameCardRepository: GameCardRepository,
     val memberRepository: MemberRepository,
     val gameRepository: GameRepository,
-    val alertPort: AlertPort,
+    val alertPortList: List<AlertPort>,
 ) {
     @Transactional(readOnly = true)
     fun findByMember(memberId: Long): List<GameCard> {
@@ -77,6 +77,8 @@ class GameCardService(
     }
 
     private fun levelAlertCall(member: Member) {
-        alertPort.send(member)
+        for (alertPort in alertPortList) {
+            alertPort.send(member)
+        }
     }
 }

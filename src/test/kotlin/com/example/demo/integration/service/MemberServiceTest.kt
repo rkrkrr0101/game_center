@@ -33,8 +33,12 @@ class MemberServiceTest
         val memberRepository: MemberRepository,
         val gameRepository: GameRepository,
     ) {
-        val alertPort = AlertPortMock()
-        val memberService = MemberService(memberRepository, gameCardRepository, alertPort)
+        val memberService =
+            MemberService(
+                memberRepository,
+                gameCardRepository,
+                listOf(AlertPortMock(), KafkaPortMock()),
+            )
 
         @Test
         fun 동적쿼리에_이름과_레벨을_넣지않으면_전체를_리턴한다() {

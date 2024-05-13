@@ -20,7 +20,7 @@ class SlackAlertPort : AlertPort {
         send(msg)
     }
 
-    override fun send(msg: String) {
+    private fun send(msg: String) {
         val restTemplate =
             RestTemplateBuilder()
                 .setConnectTimeout(Duration.ofSeconds(3))

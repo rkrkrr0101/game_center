@@ -13,6 +13,7 @@ import com.example.demo.domain.member.Member
 import com.example.demo.domain.member.repository.MemberRepository
 import com.example.demo.exception.exception.GameCardDuplicateException
 import com.example.demo.mock.AlertPortMock
+import com.example.demo.mock.KafkaPortMock
 import com.example.demo.mock.TestConstant
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
@@ -32,7 +33,13 @@ class GameCardServiceTest
         val memberRepository: MemberRepository,
         val gameRepository: GameRepository,
     ) {
-        val gameCardService = GameCardService(gameCardRepository, memberRepository, gameRepository, AlertPortMock())
+        val gameCardService =
+            GameCardService(
+                gameCardRepository,
+                memberRepository,
+                gameRepository,
+                listOf(AlertPortMock(), KafkaPortMock()),
+            )
 
         @Test
         fun gameCard를_멤버단위로_조회할수있다() {
