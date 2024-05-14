@@ -1,6 +1,6 @@
 package com.example.demo.api.controller
 
-import com.example.demo.common.Result
+import com.example.demo.api.resultType.Result
 import com.example.demo.domain.game.dto.GameResponseDto
 import com.example.demo.domain.game.service.GameService
 import org.springframework.web.bind.annotation.GetMapping

@@ -1,6 +1,6 @@
 package com.example.demo.exception
 
-import com.example.demo.common.ErrorResult
+import com.example.demo.api.resultType.ErrorResult
 import com.example.demo.exception.exception.DatePastException
 import com.example.demo.exception.exception.EmailDuplicateException
 import com.example.demo.exception.exception.GameCardDuplicateException

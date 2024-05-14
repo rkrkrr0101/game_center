@@ -1,6 +1,6 @@
 package com.example.demo.api.controller
 
-import com.example.demo.common.Result
+import com.example.demo.api.resultType.Result
 import com.example.demo.domain.gamecard.dto.GameCardDeleteDto
 import com.example.demo.domain.gamecard.dto.GameCardInsertDto
 import com.example.demo.domain.gamecard.dto.GameCardResponseDto

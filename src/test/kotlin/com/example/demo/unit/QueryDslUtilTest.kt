@@ -2,8 +2,8 @@
 
 package com.example.demo.unit
 
-import com.example.demo.common.QueryDslUtil
 import com.example.demo.domain.member.QMember
+import com.example.demo.util.QueryDslUtil
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.data.domain.PageRequest

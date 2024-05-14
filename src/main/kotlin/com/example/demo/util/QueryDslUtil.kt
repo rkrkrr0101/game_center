@@ -1,4 +1,4 @@
-package com.example.demo.common
+package com.example.demo.util
 
 import com.querydsl.core.types.Order
 import com.querydsl.core.types.OrderSpecifier

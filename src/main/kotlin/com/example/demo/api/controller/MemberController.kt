@@ -2,7 +2,7 @@
 
 package com.example.demo.api.controller
 
-import com.example.demo.common.Result
+import com.example.demo.api.resultType.Result
 import com.example.demo.constant.Level
 import com.example.demo.customdate.CustomDate
 import com.example.demo.domain.member.dto.MemberDeleteDto

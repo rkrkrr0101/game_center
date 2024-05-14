@@ -1,4 +1,4 @@
-package com.example.demo.common
+package com.example.demo.api.resultType
 
 import org.springframework.http.HttpStatus
 
