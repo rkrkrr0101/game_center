@@ -3,11 +3,11 @@
 package com.example.demo.e2e
 
 import com.example.demo.constant.Level
-import com.example.demo.customdate.CustomDate
 import com.example.demo.domain.member.Member
 import com.example.demo.domain.member.repository.MemberRepository
 import com.example.demo.mock.CustomDateFake
 import com.example.demo.mock.TestConstant
+import com.example.demo.util.customdate.CustomDate
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

@@ -1,4 +1,4 @@
-package com.example.demo.customdate
+package com.example.demo.util.customdate
 
 import org.springframework.stereotype.Component
 import java.time.LocalDate
