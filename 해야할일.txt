@@ -25,12 +25,10 @@
 게임카드생성시 연관관계편의메서드?
 
 기능추가
-	아파치카프카 추가(C:\Users\사용자명\kafka 로 cd해서 docker-compose -f kafka-compose.yaml up 실행)
+	아파치카프카 추가(C:\Users\사용자명\kafka 로 cd해서 docker-compose -f kafka-compose.yaml up 실행)//완
 	    Alert구현후 사용지점에서 List로 di받기?//완
 	    구현//완
-	    카프카서버 off시 타임아웃시간 변경(커스텀카프카템플릿 생성)
-querydsl쪽 레포지토리 확장함수로 변경?
-서비스 분리?
+querydsl쪽 레포지토리 확장함수로 변경?//굳이?
 엔티티 protected set//완
 
 
