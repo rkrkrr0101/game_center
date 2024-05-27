@@ -3,11 +3,10 @@ package com.example.demo.domain.member.repository
 import com.example.demo.constant.Level
 import com.example.demo.domain.member.Member
 import com.example.demo.domain.member.QMember
+import com.example.demo.util.LogUtil
 import com.example.demo.util.QueryDslUtil
 import com.querydsl.core.types.dsl.BooleanExpression
 import com.querydsl.jpa.impl.JPAQueryFactory
-import jakarta.persistence.EntityNotFoundException
-import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Repository
 import org.springframework.util.StringUtils
@@ -18,8 +17,6 @@ class MemberRepositoryImpl(
     private val memberJpaRepository: MemberJpaRepository,
     private val qf: JPAQueryFactory,
 ) : MemberRepository {
-    private val log = LoggerFactory.getLogger(this.javaClass)
-
     override fun save(member: Member): Member {
         return memberJpaRepository.save(member)
     }
@@ -30,8 +27,7 @@ class MemberRepositoryImpl(
 
     override fun findById(id: Long): Member {
         return memberJpaRepository.findById(id).getOrElse {
-            log.warn("id={}의 멤버를 찾을수 없습니다", id)
-            throw EntityNotFoundException("""member의 객체를 찾을수없음 id=$id""")
+            LogUtil.emptyFindThrow("member", id)
         }
     }
 
