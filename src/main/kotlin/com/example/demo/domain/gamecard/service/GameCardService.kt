@@ -1,6 +1,7 @@
 package com.example.demo.domain.gamecard.service
 
 import com.example.demo.alert.AlertPort
+import com.example.demo.constant.Level
 import com.example.demo.domain.game.repository.GameRepository
 import com.example.demo.domain.gamecard.GameCard
 import com.example.demo.domain.gamecard.dto.GameCardDeleteDto
@@ -29,6 +30,7 @@ class GameCardService(
     @Transactional
     fun save(gameCardInsertDto: GameCardInsertDto) {
         val findGame = gameRepository.findById(gameCardInsertDto.gameId)
+        // 추출
         if (!isUniqueSerialNo(findGame.title, gameCardInsertDto.serialNo)) {
             throw GameCardDuplicateException(
                 "카드의 일련번호가 중복입니다",
@@ -48,10 +50,8 @@ class GameCardService(
             )
         val prevLevel = member.level
         member.addGameCard(gameCard)
-        val curLevel = member.level
-        if (curLevel != prevLevel) {
-            levelAlertCall(member)
-        }
+
+        alertSend(prevLevel, member)
     }
 
     @Transactional
@@ -61,8 +61,15 @@ class GameCardService(
 
         val prevLevel = member.level
         member.removeGameCard(gameCard)
-        val curLevel = member.level
 
+        alertSend(prevLevel, member)
+    }
+
+    private fun alertSend(
+        prevLevel: Level,
+        member: Member,
+    ) {
+        val curLevel = member.level
         if (curLevel != prevLevel) {
             levelAlertCall(member)
         }
