@@ -4,8 +4,8 @@ package com.example.demo.unit
 
 import com.example.demo.constant.Level
 import com.example.demo.domain.game.Game
-import com.example.demo.domain.gamecard.GameCard
 import com.example.demo.domain.member.Member
+import com.example.demo.util.TestFactory
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
@@ -19,7 +19,7 @@ class MemberTest {
         val member = Member(name = "test1", email = "aa@naver.com", joinDate = testDate, id = 1)
         val pokeGame = Game("poke", 1)
         val gameCard =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle1",
                 30,
                 BigDecimal(20.22).setScale(2, RoundingMode.HALF_UP),
@@ -40,7 +40,7 @@ class MemberTest {
         val pokeGame = Game("poke", 1)
 
         val gameCard1 =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle1",
                 30,
                 BigDecimal(20.22).setScale(2, RoundingMode.HALF_UP),
@@ -49,7 +49,7 @@ class MemberTest {
                 1,
             )
         val gameCard2 =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle2",
                 31,
                 BigDecimal(20).setScale(2, RoundingMode.HALF_UP),
@@ -80,7 +80,7 @@ class MemberTest {
         val member = Member(name = "test1", email = "aa@naver.com", joinDate = testDate, id = 1)
         val pokeGame = Game("poke", 1)
         val gameCard1 =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle1",
                 30,
                 BigDecimal(0).setScale(2, RoundingMode.HALF_UP),
@@ -89,7 +89,7 @@ class MemberTest {
                 1,
             )
         val gameCard2 =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle2",
                 31,
                 BigDecimal(0).setScale(2, RoundingMode.HALF_UP),
@@ -110,7 +110,7 @@ class MemberTest {
         val member = Member(name = "test1", email = "aa@naver.com", joinDate = testDate, id = 1)
         val pokeGame = Game("poke", 1)
         val gameCard1 =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle1",
                 30,
                 BigDecimal(1).setScale(2, RoundingMode.HALF_UP),
@@ -132,7 +132,7 @@ class MemberTest {
         val pokeGame = Game("poke", 1)
         val elvGame = Game("elv", 2)
         val gameCard1 =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle1",
                 30,
                 BigDecimal(20.22).setScale(2, RoundingMode.HALF_UP),
@@ -141,7 +141,7 @@ class MemberTest {
                 1,
             )
         val gameCard2 =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle2",
                 31,
                 BigDecimal(80).setScale(2, RoundingMode.HALF_UP),
@@ -165,7 +165,7 @@ class MemberTest {
         val pokeGame = Game("poke", 1)
         val elvGame = Game("elv", 2)
         val gameCard1 =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle1",
                 30,
                 BigDecimal(1).setScale(2, RoundingMode.HALF_UP),
@@ -174,7 +174,7 @@ class MemberTest {
                 1,
             )
         val gameCard2 =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle2",
                 31,
                 BigDecimal(1).setScale(2, RoundingMode.HALF_UP),
@@ -183,7 +183,7 @@ class MemberTest {
                 2,
             )
         val gameCard3 =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle3",
                 32,
                 BigDecimal(1).setScale(2, RoundingMode.HALF_UP),
@@ -192,7 +192,7 @@ class MemberTest {
                 3,
             )
         val gameCard4 =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle4",
                 33,
                 BigDecimal(1).setScale(2, RoundingMode.HALF_UP),
@@ -218,7 +218,7 @@ class MemberTest {
         val pokeGame = Game("poke", 1)
         val elvGame = Game("elv", 2)
         val gameCard1 =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle1",
                 30,
                 BigDecimal(0).setScale(2, RoundingMode.HALF_UP),
@@ -227,7 +227,7 @@ class MemberTest {
                 1,
             )
         val gameCard2 =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle2",
                 31,
                 BigDecimal(0).setScale(2, RoundingMode.HALF_UP),
@@ -236,7 +236,7 @@ class MemberTest {
                 2,
             )
         val gameCard3 =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle3",
                 32,
                 BigDecimal(0).setScale(2, RoundingMode.HALF_UP),
@@ -245,7 +245,7 @@ class MemberTest {
                 3,
             )
         val gameCard4 =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle4",
                 33,
                 BigDecimal(0).setScale(2, RoundingMode.HALF_UP),
@@ -271,7 +271,7 @@ class MemberTest {
 
         val elvGame = Game("elv", 2)
         val gameCard1 =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle1",
                 30,
                 BigDecimal(100).setScale(2, RoundingMode.HALF_UP),
@@ -280,7 +280,7 @@ class MemberTest {
                 1,
             )
         val gameCard2 =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle2",
                 31,
                 BigDecimal(1).setScale(2, RoundingMode.HALF_UP),
@@ -289,7 +289,7 @@ class MemberTest {
                 2,
             )
         val gameCard3 =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle3",
                 32,
                 BigDecimal(1).setScale(2, RoundingMode.HALF_UP),
@@ -298,7 +298,7 @@ class MemberTest {
                 3,
             )
         val gameCard4 =
-            GameCard(
+            TestFactory.createGameCard(
                 "testTitle4",
                 33,
                 BigDecimal(1).setScale(2, RoundingMode.HALF_UP),

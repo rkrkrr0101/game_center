@@ -4,7 +4,6 @@ package com.example.demo.integration.service
 
 import com.example.demo.constant.Level
 import com.example.demo.domain.game.repository.GameRepository
-import com.example.demo.domain.gamecard.GameCard
 import com.example.demo.domain.gamecard.dto.GameCardDeleteDto
 import com.example.demo.domain.gamecard.dto.GameCardInsertDto
 import com.example.demo.domain.gamecard.repository.GameCardRepository
@@ -15,6 +14,7 @@ import com.example.demo.exception.exception.GameCardDuplicateException
 import com.example.demo.mock.KafkaPortMock
 import com.example.demo.mock.SlackPortMock
 import com.example.demo.mock.TestConstant
+import com.example.demo.util.TestFactory
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -47,8 +47,8 @@ class GameCardServiceTest
             val member = Member("aaaa", "aa@naver.com", LocalDate.parse(TestConstant.TESTNOWDATE))
 
             val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
-            val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, member)
-            val gameCard2 = GameCard("bbb", 2, BigDecimal(40), game, member)
+            val gameCard1 = TestFactory.createGameCard("aaa", 1, BigDecimal(30), game, member)
+            val gameCard2 = TestFactory.createGameCard("bbb", 2, BigDecimal(40), game, member)
             member.addGameCard(gameCard1)
             member.addGameCard(gameCard2)
             memberRepository.save(member)
@@ -158,8 +158,8 @@ class GameCardServiceTest
             // g
             val member = Member("aaaa", "aa@naver.com", LocalDate.parse(TestConstant.TESTNOWDATE))
             val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
-            val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, member)
-            val gameCard2 = GameCard("bbb", 2, BigDecimal(40), game, member)
+            val gameCard1 = TestFactory.createGameCard("aaa", 1, BigDecimal(30), game, member)
+            val gameCard2 = TestFactory.createGameCard("bbb", 2, BigDecimal(40), game, member)
             member.addGameCard(gameCard1)
             member.addGameCard(gameCard2)
             memberRepository.save(member)
@@ -178,8 +178,8 @@ class GameCardServiceTest
             // g
             val member = Member("aaaa", "aa@naver.com", LocalDate.parse(TestConstant.TESTNOWDATE))
             val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
-            val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, member)
-            val gameCard2 = GameCard("bbb", 2, BigDecimal(40), game, member)
+            val gameCard1 = TestFactory.createGameCard("aaa", 1, BigDecimal(30), game, member)
+            val gameCard2 = TestFactory.createGameCard("bbb", 2, BigDecimal(40), game, member)
             member.addGameCard(gameCard1)
             member.addGameCard(gameCard2)
             memberRepository.save(member)
@@ -200,8 +200,8 @@ class GameCardServiceTest
             // g
             val member = Member("aaaa", "aa@naver.com", LocalDate.parse(TestConstant.TESTNOWDATE))
             val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
-            val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, member)
-            val gameCard2 = GameCard("bbb", 2, BigDecimal(40), game, member)
+            val gameCard1 = TestFactory.createGameCard("aaa", 1, BigDecimal(30), game, member)
+            val gameCard2 = TestFactory.createGameCard("bbb", 2, BigDecimal(40), game, member)
             member.addGameCard(gameCard1)
             member.addGameCard(gameCard2)
 
@@ -221,7 +221,7 @@ class GameCardServiceTest
             // g
             val member = Member("aaaa", "aa@naver.com", LocalDate.parse(TestConstant.TESTNOWDATE))
             val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
-            val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, member)
+            val gameCard1 = TestFactory.createGameCard("aaa", 1, BigDecimal(30), game, member)
 
             member.addGameCard(gameCard1)
             memberRepository.save(member)

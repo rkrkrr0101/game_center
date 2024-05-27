@@ -3,12 +3,12 @@
 package com.example.demo.e2e
 
 import com.example.demo.domain.game.repository.GameRepository
-import com.example.demo.domain.gamecard.GameCard
 import com.example.demo.domain.gamecard.repository.GameCardRepository
 import com.example.demo.domain.member.Member
 import com.example.demo.domain.member.repository.MemberRepository
 import com.example.demo.mock.CustomDateFake
 import com.example.demo.mock.TestConstant
+import com.example.demo.util.TestFactory
 import com.example.demo.util.customdate.CustomDate
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.assertj.core.api.Assertions
@@ -49,9 +49,9 @@ class GameCardControllerE2ETest
                     CustomDateFake(TestConstant.TESTNOWDATE).now(),
                 )
             val game = gameRepository.findAll()[0]
-            val gameCard1 = GameCard("aaa", 12, BigDecimal(30), game, member)
-            val gameCard2 = GameCard("bbb", 123, BigDecimal(30), game, member)
-            val gameCard3 = GameCard("ccc", 1234, BigDecimal(30), game, member)
+            val gameCard1 = TestFactory.createGameCard("aaa", 12, BigDecimal(30), game, member)
+            val gameCard2 = TestFactory.createGameCard("bbb", 123, BigDecimal(30), game, member)
+            val gameCard3 = TestFactory.createGameCard("ccc", 1234, BigDecimal(30), game, member)
             member.addGameCard(gameCard1)
             member.addGameCard(gameCard2)
             member.addGameCard(gameCard3)
@@ -301,7 +301,7 @@ class GameCardControllerE2ETest
                     CustomDateFake(TestConstant.TESTNOWDATE).now(),
                 )
             val game = gameRepository.findAll()[0]
-            val gameCard = GameCard("aaa", 12, BigDecimal(30), game, member)
+            val gameCard = TestFactory.createGameCard("aaa", 12, BigDecimal(30), game, member)
             member.addGameCard(gameCard)
             memberRepository.save(member)
 

@@ -4,7 +4,6 @@ package com.example.demo.integration.service
 
 import com.example.demo.constant.Level
 import com.example.demo.domain.game.repository.GameRepository
-import com.example.demo.domain.gamecard.GameCard
 import com.example.demo.domain.gamecard.repository.GameCardRepository
 import com.example.demo.domain.member.Member
 import com.example.demo.domain.member.dto.MemberDeleteDto
@@ -14,6 +13,7 @@ import com.example.demo.domain.member.repository.MemberRepository
 import com.example.demo.domain.member.service.MemberService
 import com.example.demo.exception.exception.EmailDuplicateException
 import com.example.demo.mock.*
+import com.example.demo.util.TestFactory
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -329,8 +329,8 @@ class MemberServiceTest
             val member = memberService.findDynamicSearchSortBy(sort, name = "aaaa")[0]
 
             val game = gameRepository.findAll().filter { it.title == "pokemon" }[0]
-            val gameCard1 = GameCard("aaa", 1, BigDecimal(30), game, member)
-            val gameCard2 = GameCard("bbb", 2, BigDecimal(40), game, member)
+            val gameCard1 = TestFactory.createGameCard("aaa", 1, BigDecimal(30), game, member)
+            val gameCard2 = TestFactory.createGameCard("bbb", 2, BigDecimal(40), game, member)
             member.addGameCard(gameCard1)
             member.addGameCard(gameCard2)
 
