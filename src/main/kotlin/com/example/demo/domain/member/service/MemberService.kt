@@ -76,12 +76,17 @@ class MemberService(
 
     private fun isUniqueEmail(
         email: String,
-        memberId: Long,
+        updaterId: Long,
     ): Boolean { // update시 사용
         val member = memberRepository.findByEmail(email) ?: return true
-        if (member.id == memberId) { // 자기자신의 이메일일경우 유니크로 취급
-            return true
-        }
+        if (isEqualMember(member, updaterId)) return true
         return false
+    }
+
+    private fun isEqualMember(
+        member: Member,
+        updaterId: Long,
+    ): Boolean {
+        return member.id == updaterId
     }
 }
