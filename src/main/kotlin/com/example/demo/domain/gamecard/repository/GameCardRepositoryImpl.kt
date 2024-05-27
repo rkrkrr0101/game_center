@@ -1,5 +1,6 @@
 package com.example.demo.domain.gamecard.repository
 
+import com.example.demo.domain.game.Game
 import com.example.demo.domain.gamecard.GameCard
 import com.example.demo.domain.member.Member
 import com.example.demo.util.LogUtil
@@ -13,10 +14,10 @@ class GameCardRepositoryImpl(val gameCardJpaRepository: GameCardJpaRepository) :
     }
 
     override fun findByGameAndSerialNo(
-        title: String,
+        game: Game,
         serialNo: Long,
     ): GameCard? {
-        return gameCardJpaRepository.findByGameAndSerialNo(title, serialNo)
+        return gameCardJpaRepository.findByGameAndSerialNo(game, serialNo)
     }
 
     override fun deleteByMember(member: Member) {

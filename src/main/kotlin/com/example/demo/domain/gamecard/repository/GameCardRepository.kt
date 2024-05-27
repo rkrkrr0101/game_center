@@ -1,5 +1,6 @@
 package com.example.demo.domain.gamecard.repository
 
+import com.example.demo.domain.game.Game
 import com.example.demo.domain.gamecard.GameCard
 import com.example.demo.domain.member.Member
 
@@ -7,7 +8,7 @@ interface GameCardRepository {
     fun findByMember(member: Member): List<GameCard>
 
     fun findByGameAndSerialNo(
-        title: String,
+        game: Game,
         serialNo: Long,
     ): GameCard?
 

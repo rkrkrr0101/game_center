@@ -1,5 +1,6 @@
 package com.example.demo.domain.gamecard.repository
 
+import com.example.demo.domain.game.Game
 import com.example.demo.domain.gamecard.GameCard
 import com.example.demo.domain.member.Member
 import org.springframework.data.jpa.repository.JpaRepository
@@ -14,9 +15,9 @@ interface GameCardJpaRepository : JpaRepository<GameCard, Long> {
 
     fun deleteByMember(member: Member)
 
-    @Query("select g from GameCard as g where g.game.title=:title and g.serialNo=:serialNo")
+    @Query("select g from GameCard as g where g.game=:game and g.serialNo=:serialNo")
     fun findByGameAndSerialNo(
-        @Param("title")title: String,
+        @Param("game")game: Game,
         @Param("serialNo")serialNo: Long,
     ): GameCard?
 }

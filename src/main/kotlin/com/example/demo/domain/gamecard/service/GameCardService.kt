@@ -30,18 +30,17 @@ class GameCardService(
 
     @Transactional
     fun save(gameCardInsertDto: GameCardInsertDto) {
-        val findGame = gameRepository.findById(gameCardInsertDto.gameId)
+        val game = gameRepository.findById(gameCardInsertDto.gameId)
 
-        requireUniqueGameCard(findGame, gameCardInsertDto)
+        requireUniqueGameCard(game, gameCardInsertDto.serialNo)
 
         val member = memberRepository.findById(gameCardInsertDto.memberId)
-
         val gameCard =
             GameCard(
                 gameCardInsertDto.title,
                 gameCardInsertDto.serialNo,
                 gameCardInsertDto.price,
-                findGame,
+                game,
                 member,
             )
         val prevLevel = member.level
@@ -51,14 +50,14 @@ class GameCardService(
     }
 
     private fun requireUniqueGameCard(
-        findGame: Game,
-        gameCardInsertDto: GameCardInsertDto,
+        game: Game,
+        serialNo: Long,
     ) {
-        if (!isUniqueSerialNo(findGame.title, gameCardInsertDto.serialNo)) {
+        if (!isUniqueSerialNo(game, serialNo)) {
             throw GameCardDuplicateException(
                 "카드의 일련번호가 중복입니다",
-                findGame.title,
-                gameCardInsertDto.serialNo,
+                game.title,
+                serialNo,
             )
         }
     }
@@ -85,10 +84,10 @@ class GameCardService(
     }
 
     private fun isUniqueSerialNo(
-        title: String,
+        game: Game,
         serialNo: Long,
     ): Boolean {
-        gameCardRepository.findByGameAndSerialNo(title, serialNo) ?: return true
+        gameCardRepository.findByGameAndSerialNo(game, serialNo) ?: return true
         return false
     }
 
