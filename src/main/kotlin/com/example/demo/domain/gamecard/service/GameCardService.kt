@@ -49,19 +49,6 @@ class GameCardService(
         alertSend(prevLevel, member)
     }
 
-    private fun requireUniqueGameCard(
-        game: Game,
-        serialNo: Long,
-    ) {
-        if (!isUniqueSerialNo(game, serialNo)) {
-            throw GameCardDuplicateException(
-                "카드의 일련번호가 중복입니다",
-                game.title,
-                serialNo,
-            )
-        }
-    }
-
     @Transactional
     fun delete(gameCardDeleteDto: GameCardDeleteDto) {
         val gameCard = gameCardRepository.findById(gameCardDeleteDto.id)
@@ -80,6 +67,19 @@ class GameCardService(
         val curLevel = member.level
         if (curLevel != prevLevel) {
             levelAlertCall(member)
+        }
+    }
+
+    private fun requireUniqueGameCard(
+        game: Game,
+        serialNo: Long,
+    ) {
+        if (!isUniqueSerialNo(game, serialNo)) {
+            throw GameCardDuplicateException(
+                "카드의 일련번호가 중복입니다",
+                game.title,
+                serialNo,
+            )
         }
     }
 
