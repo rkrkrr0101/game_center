@@ -8,8 +8,7 @@ import com.example.demo.domain.member.dto.MemberDeleteDto
 import com.example.demo.domain.member.dto.MemberInsertDto
 import com.example.demo.domain.member.dto.MemberUpdateDto
 import com.example.demo.domain.member.repository.MemberRepository
-import com.example.demo.exception.exception.EmailDuplicateException
-import org.slf4j.LoggerFactory
+import com.example.demo.util.LogUtil
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -21,8 +20,6 @@ class MemberService(
     val gameCardRepository: GameCardRepository,
     val alertPortList: List<AlertPort>,
 ) {
-    private val log = LoggerFactory.getLogger(this.javaClass)
-
     fun findDynamicSearchSortBy(
         sort: Sort,
         name: String? = null,
@@ -38,8 +35,7 @@ class MemberService(
     @Transactional
     fun save(memberInsertDto: MemberInsertDto) {
         if (!isUniqueEmail(memberInsertDto.email)) {
-            log.warn("멤버의 추가중 이메일중복:{}", memberInsertDto.email)
-            throw EmailDuplicateException("이메일이 중복입니다", memberInsertDto.email)
+            LogUtil.emailDuplicateThrow("save", memberInsertDto.email)
         }
         val saveMember = memberRepository.save(memberInsertDto.dtoToDomain())
         for (alertPort in alertPortList) {
@@ -50,8 +46,7 @@ class MemberService(
     @Transactional
     fun update(memberUpdateDto: MemberUpdateDto) {
         if (!isUniqueEmail(memberUpdateDto.email, memberUpdateDto.id)) {
-            log.warn("{}의 수정시 이메일중복:{}", memberUpdateDto.id, memberUpdateDto.email)
-            throw EmailDuplicateException("이메일이 중복입니다", memberUpdateDto.email)
+            LogUtil.emailDuplicateThrow("update", memberUpdateDto.email)
         }
         val findMember = memberRepository.findById(memberUpdateDto.id)
         findMember.update(
