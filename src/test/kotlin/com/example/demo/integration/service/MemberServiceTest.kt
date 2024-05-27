@@ -37,7 +37,7 @@ class MemberServiceTest
             MemberService(
                 memberRepository,
                 gameCardRepository,
-                listOf(AlertPortMock(), KafkaPortMock()),
+                listOf(SlackPortMock(), KafkaPortMock()),
             )
 
         @Test

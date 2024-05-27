@@ -12,8 +12,8 @@ import com.example.demo.domain.gamecard.service.GameCardService
 import com.example.demo.domain.member.Member
 import com.example.demo.domain.member.repository.MemberRepository
 import com.example.demo.exception.exception.GameCardDuplicateException
-import com.example.demo.mock.AlertPortMock
 import com.example.demo.mock.KafkaPortMock
+import com.example.demo.mock.SlackPortMock
 import com.example.demo.mock.TestConstant
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
@@ -38,7 +38,7 @@ class GameCardServiceTest
                 gameCardRepository,
                 memberRepository,
                 gameRepository,
-                listOf(AlertPortMock(), KafkaPortMock()),
+                listOf(SlackPortMock(), KafkaPortMock()),
             )
 
         @Test
