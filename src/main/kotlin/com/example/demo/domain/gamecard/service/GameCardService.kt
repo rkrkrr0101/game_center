@@ -46,7 +46,7 @@ class GameCardService(
         val prevLevel = member.level
         member.addGameCard(gameCard)
 
-        alertSend(prevLevel, member)
+        checkAlert(prevLevel, member)
     }
 
     @Transactional
@@ -57,10 +57,10 @@ class GameCardService(
         val prevLevel = member.level
         member.removeGameCard(gameCard)
 
-        alertSend(prevLevel, member)
+        checkAlert(prevLevel, member)
     }
 
-    private fun alertSend(
+    private fun checkAlert(
         prevLevel: Level,
         member: Member,
     ) {
