@@ -34,7 +34,7 @@ querydsl쪽 레포지토리 확장함수로 변경?//굳이?
 테스트 표준픽스처(beforeEach에서 표준적으로 사용할거 생성?)? x
 그냥 생성팩토리만 만들자
     gamecard완
-gamecard에서 game과 serialno 묶기 or 게임카드에서 유니크확인메서드 추가
+gamecard에서 game과 serialno 묶기?
 https://ttl-blog.tistory.com/133
 
 

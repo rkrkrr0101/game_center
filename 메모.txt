@@ -8,6 +8,8 @@ view url
 테스트코드(필요없으면 작성하지않고,작성하려면 빡빡하게)
     시간같은 외부의존성을 모킹해서 외부변수를 제거함
 
+view를 사용
+
 
 카프카실행
     kafka 로 cd해서 docker-compose -f kafka-compose.yaml up 실행

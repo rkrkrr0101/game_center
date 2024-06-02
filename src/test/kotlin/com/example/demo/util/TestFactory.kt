@@ -15,7 +15,7 @@ class TestFactory {
             member: Member,
             id: Long = 0L,
         ): GameCard {
-            return GameCard(title, serialNo, price, game, member)
+            return GameCard(title, serialNo, price, game, member, id)
         }
     }
 }
