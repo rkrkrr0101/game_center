@@ -1,4 +1,4 @@
-package com.example.demo.util.customdate
+package com.example.demo.common
 
 import java.time.LocalDate
 

@@ -3,13 +3,13 @@
 package com.example.demo.integration.service
 
 import com.example.demo.constant.Level
-import com.example.demo.domain.game.repository.GameRepository
+import com.example.demo.domain.game.service.GameRepository
 import com.example.demo.domain.gamecard.dto.GameCardDeleteDto
 import com.example.demo.domain.gamecard.dto.GameCardInsertDto
-import com.example.demo.domain.gamecard.repository.GameCardRepository
+import com.example.demo.domain.gamecard.service.GameCardRepository
 import com.example.demo.domain.gamecard.service.GameCardService
 import com.example.demo.domain.member.Member
-import com.example.demo.domain.member.repository.MemberRepository
+import com.example.demo.domain.member.service.MemberRepository
 import com.example.demo.exception.exception.GameCardDuplicateException
 import com.example.demo.mock.KafkaPortMock
 import com.example.demo.mock.SlackPortMock

@@ -1,4 +1,4 @@
-package com.example.demo.domain.gamecard.repository
+package com.example.demo.domain.gamecard.service
 
 import com.example.demo.domain.game.Game
 import com.example.demo.domain.gamecard.GameCard

@@ -1,6 +1,6 @@
 package com.example.demo.mock
 
-import com.example.demo.util.customdate.CustomDate
+import com.example.demo.common.CustomDate
 import java.time.LocalDate
 
 class CustomDateFake(private val fixedDate: String) : CustomDate {

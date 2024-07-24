@@ -2,6 +2,7 @@ package com.example.demo.domain.gamecard.repository
 
 import com.example.demo.domain.game.Game
 import com.example.demo.domain.gamecard.GameCard
+import com.example.demo.domain.gamecard.service.GameCardRepository
 import com.example.demo.domain.member.Member
 import com.example.demo.util.LogUtil
 import org.springframework.stereotype.Repository

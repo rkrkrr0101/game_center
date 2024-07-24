@@ -1,4 +1,4 @@
-package com.example.demo.alert
+package com.example.demo.common
 
 import com.example.demo.domain.member.Member
 

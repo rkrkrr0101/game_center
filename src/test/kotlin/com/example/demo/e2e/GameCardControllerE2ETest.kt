@@ -2,14 +2,14 @@
 
 package com.example.demo.e2e
 
-import com.example.demo.domain.game.repository.GameRepository
-import com.example.demo.domain.gamecard.repository.GameCardRepository
+import com.example.demo.common.CustomDate
+import com.example.demo.domain.game.service.GameRepository
+import com.example.demo.domain.gamecard.service.GameCardRepository
 import com.example.demo.domain.member.Member
-import com.example.demo.domain.member.repository.MemberRepository
+import com.example.demo.domain.member.service.MemberRepository
 import com.example.demo.mock.CustomDateFake
 import com.example.demo.mock.TestConstant
 import com.example.demo.util.TestFactory
-import com.example.demo.util.customdate.CustomDate
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test

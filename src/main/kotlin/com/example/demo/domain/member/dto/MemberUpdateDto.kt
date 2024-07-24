@@ -1,7 +1,7 @@
 package com.example.demo.domain.member.dto
 
+import com.example.demo.common.CustomDate
 import com.example.demo.exception.exception.DatePastException
-import com.example.demo.util.customdate.CustomDate
 import com.fasterxml.jackson.annotation.JsonFormat
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank

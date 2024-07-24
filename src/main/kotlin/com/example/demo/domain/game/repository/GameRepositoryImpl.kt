@@ -1,6 +1,7 @@
 package com.example.demo.domain.game.repository
 
 import com.example.demo.domain.game.Game
+import com.example.demo.domain.game.service.GameRepository
 import com.example.demo.util.LogUtil
 import org.springframework.stereotype.Repository
 import kotlin.jvm.optionals.getOrElse

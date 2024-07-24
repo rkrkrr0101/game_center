@@ -1,13 +1,12 @@
 package com.example.demo.domain.member.service
 
-import com.example.demo.alert.AlertPort
+import com.example.demo.common.AlertPort
 import com.example.demo.constant.Level
-import com.example.demo.domain.gamecard.repository.GameCardRepository
+import com.example.demo.domain.gamecard.service.GameCardRepository
 import com.example.demo.domain.member.Member
 import com.example.demo.domain.member.dto.MemberDeleteDto
 import com.example.demo.domain.member.dto.MemberInsertDto
 import com.example.demo.domain.member.dto.MemberUpdateDto
-import com.example.demo.domain.member.repository.MemberRepository
 import com.example.demo.util.LogUtil
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service

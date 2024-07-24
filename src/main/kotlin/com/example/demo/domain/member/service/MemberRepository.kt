@@ -1,4 +1,4 @@
-package com.example.demo.domain.member.repository
+package com.example.demo.domain.member.service
 
 import com.example.demo.constant.Level
 import com.example.demo.domain.member.Member

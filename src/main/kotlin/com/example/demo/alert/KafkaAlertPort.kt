@@ -1,5 +1,6 @@
 package com.example.demo.alert
 
+import com.example.demo.common.AlertPort
 import com.example.demo.constant.Constant
 import com.example.demo.domain.member.Member
 import org.slf4j.LoggerFactory

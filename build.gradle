@@ -28,6 +28,7 @@ dependencies {
 	implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
 	implementation 'org.jetbrains.kotlin:kotlin-reflect'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	//테스트용 모킹라이브러리
@@ -38,6 +39,7 @@ dependencies {
 	//쿼리dsl
 	implementation 'com.querydsl:querydsl-core:5.1.0'
 	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+
 	kapt 'com.querydsl:querydsl-apt:5.1.0:jakarta'
 }
 

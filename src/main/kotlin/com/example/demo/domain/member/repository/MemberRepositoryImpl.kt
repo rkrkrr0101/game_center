@@ -3,6 +3,7 @@ package com.example.demo.domain.member.repository
 import com.example.demo.constant.Level
 import com.example.demo.domain.member.Member
 import com.example.demo.domain.member.QMember
+import com.example.demo.domain.member.service.MemberRepository
 import com.example.demo.util.LogUtil
 import com.example.demo.util.QueryDslUtil
 import com.querydsl.core.types.dsl.BooleanExpression

@@ -1,4 +1,4 @@
-package com.example.demo.domain.game.repository
+package com.example.demo.domain.game.service
 
 import com.example.demo.domain.game.Game
 
